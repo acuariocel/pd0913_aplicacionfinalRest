@@ -1,0 +1,5 @@
+HOST	: PC1
+USUARIO	: PD0913
+CLAVE	: CEL0913
+PUERTO	: 4444	
+BASE	: pd0913_aplicacionfinaldb
