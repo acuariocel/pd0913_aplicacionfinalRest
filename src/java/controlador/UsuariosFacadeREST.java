@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -26,6 +27,7 @@ import modelo.Usuarios;
 @Stateless
 @Path("modelo.usuarios")
 public class UsuariosFacadeREST extends AbstractFacade<Usuarios> {
+
     @PersistenceContext(unitName = "pd0913_aplicacionfinalRestPU")
     private EntityManager em;
 
@@ -85,5 +87,21 @@ public class UsuariosFacadeREST extends AbstractFacade<Usuarios> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
+    @GET
+    @Path("login/cedula={cedula},clave={clave}")
+    @Produces({"application/json; charset=utf-8", "application/json"})
+    public Usuarios login(@PathParam("cedula") String cedula, @PathParam("clave") String clave) {
+        TypedQuery<Usuarios> tqu;
+        tqu = getEntityManager().createQuery("SELECT u FROM Usuarios u WHERE u.cedula=:cedula AND u.clave=:clave", Usuarios.class);
+        tqu.setParameter("cedula", cedula);
+        tqu.setParameter("clave", clave);
+        try {
+            Usuarios u = tqu.getSingleResult();
+            return u;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }
