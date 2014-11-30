@@ -3,3 +3,4 @@ USUARIO	: PD0913
 CLAVE	: CEL0913
 PUERTO	: 4444	
 BASE	: pd0913_aplicacionfinaldb
+RESOURCE: pd0913_aplicacionfinal
