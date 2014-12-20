@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Sesiones.findByFechaHoraInicio", query = "SELECT s FROM Sesiones s WHERE s.fechaHoraInicio = :fechaHoraInicio"),
     @NamedQuery(name = "Sesiones.findByFechaHoraFin", query = "SELECT s FROM Sesiones s WHERE s.fechaHoraFin = :fechaHoraFin")})
 public class Sesiones implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -73,6 +74,14 @@ public class Sesiones implements Serializable {
 
     public Sesiones(Integer idSesion, int bloqueado, Date fechaHoraInicio, Date fechaHoraFin) {
         this.idSesion = idSesion;
+        this.bloqueado = bloqueado;
+        this.fechaHoraInicio = fechaHoraInicio;
+        this.fechaHoraFin = fechaHoraFin;
+    }
+
+    public Sesiones(short bloqueado, Date fechaHoraInicio, Date fechaHoraFin, Equipos e, Usuarios u) {
+        this.idEquipo = e;
+        this.idUsuario = u;
         this.bloqueado = bloqueado;
         this.fechaHoraInicio = fechaHoraInicio;
         this.fechaHoraFin = fechaHoraFin;
@@ -150,5 +159,5 @@ public class Sesiones implements Serializable {
     public String toString() {
         return "modelo.Sesiones[ idSesion=" + idSesion + " ]";
     }
-    
+
 }
